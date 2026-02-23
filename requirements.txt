@@ -1,0 +1,5 @@
+spacy
+python-dateutil
+pydantic
+rich
+pytest
