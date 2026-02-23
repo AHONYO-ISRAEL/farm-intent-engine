@@ -10,6 +10,7 @@ INTENT_REGISTRY = {
         "patterns": [
             [{"LEMMA": "sell"}, {"OP": "*"}, {"LEMMA": "egg"}],
             [{"LEMMA": "egg"}, {"OP": "*"}, {"LEMMA": "sell"}],
+            [{"LEMMA": "egg"}, {"OP": "*"}, {"LEMMA": "sale"}],
         ],
         "query_type": "absolute",
         "priority": 7

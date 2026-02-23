@@ -1,7 +1,7 @@
 import spacy
 from spacy.matcher import Matcher
 
-from app.entity_extractor import extract_date_range, extract_date_entities
+from app.entity_extractor import extract_date_range, extract_date_entities, detect_query_type
 from app.intent_registry import INTENT_REGISTRY
 from app.models import IntentResult
 from app.remove_aux_tokens import remove_aux
@@ -53,6 +53,6 @@ class IntentEngine:
         return IntentResult(
             intent_id=best_intent,
             entities={"date_range": date_range} if date_range else {},
-            query_type=INTENT_REGISTRY[best_intent]["query_type"],
+            query_type= detect_query_type(doc),
             confidence=confidence
         )
