@@ -1,9 +1,18 @@
-from rich import print
-from app.intent_egine import IntentEngine
+from fastapi import FastAPI
+from pydantic import BaseModel
 
+from app.intent_egine import IntentEngine
+from app.models import Query
+
+app = FastAPI()
 engine = IntentEngine()
 
-while True:
-    query = input("\nAsk something: ")
-    result = engine.detect_intent(query)
-    print(result.model_dump_json(indent=2))
+
+@app.get("/")
+def root():
+    return {"message": "Intent engine running", "status": "ok"}
+
+
+@app.post("/predict")
+def predict(query: Query):
+    return engine.detect_intent(query.text)

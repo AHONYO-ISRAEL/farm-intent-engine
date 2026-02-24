@@ -10,3 +10,6 @@ class IntentResult(BaseModel):
     entities: Dict
     query_type: str
     confidence: float
+
+class Query(BaseModel):
+    text: str
