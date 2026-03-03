@@ -63,21 +63,45 @@ INTENT_REGISTRY = {
 
     "track_egg_production": {
         "patterns": [
-            # how many eggs produced
-            [{"LOWER": "how"}, {"LOWER": "many"}, {"LEMMA": "egg"}],
 
-            # produce eggs
-            [{"LEMMA": "produce", "POS": "VERB"}, {"OP": "*"}, {"LEMMA": "egg"}],
+            # how many eggs were produced
+            [
+                {"LOWER": "how"},
+                {"LOWER": "many"},
+                {"LEMMA": "egg"},
+                {"OP": "*"},
+                {"LEMMA": {"IN": ["produce", "lay", "collect"]}}
+            ],
+
+            # produce / lay eggs
+            [
+                {"LEMMA": {"IN": ["produce", "lay"]}, "POS": "VERB"},
+                {"OP": "*"},
+                {"LEMMA": "egg"}
+            ],
 
             # eggs produced (passive)
-            [{"LEMMA": "egg"}, {"OP": "*"}, {"LEMMA": "produce"}],
+            [
+                {"LEMMA": "egg"},
+                {"OP": "*"},
+                {"LEMMA": {"IN": ["produce", "lay"]}}
+            ],
 
             # egg collection
-            [{"LEMMA": "egg"}, {"LEMMA": "collection"}],
+            [
+                {"LEMMA": "egg"},
+                {"LEMMA": "collection"}
+            ],
+
+            # collected eggs
+            [
+                {"LEMMA": "collect"},
+                {"OP": "*"},
+                {"LEMMA": "egg"}
+            ],
         ],
         "priority": 7
     },
-
     "track_egg_production_per_flock": {
         "patterns": [
             # eggs per cage/batch/flock
@@ -187,18 +211,45 @@ INTENT_REGISTRY = {
 
     "track_eggs_sold": {
         "patterns": [
+
+            # how many eggs were sold
+            [
+                {"LOWER": "how"},
+                {"LOWER": "many"},
+                {"LEMMA": "egg"},
+                {"OP": "*"},
+                {"LEMMA": "sell"}
+            ],
+
             # sell eggs
-            [{"LEMMA": "sell", "POS": "VERB"}, {"OP": "*"}, {"LEMMA": "egg"}],
+            [
+                {"LEMMA": "sell", "POS": "VERB"},
+                {"OP": "*"},
+                {"LEMMA": "egg"}
+            ],
 
             # eggs sold (passive)
-            [{"LEMMA": "egg"}, {"OP": "*"}, {"LEMMA": "sell"}],
+            [
+                {"LEMMA": "egg"},
+                {"OP": "*"},
+                {"LEMMA": "sell"}
+            ],
 
             # egg sales
-            [{"LEMMA": "egg"}, {"LEMMA": "sale"}],
-        ],
-        "priority": 7
-    },
+            [
+                {"LEMMA": "egg"},
+                {"LEMMA": "sale"}
+            ],
 
+            # total eggs sold
+            [
+                {"LEMMA": "total"},
+                {"OP": "*"},
+                {"LEMMA": "sell"}
+            ],
+        ],
+        "priority": 8
+    },
     "track_revenue": {
         "patterns": [
             [{"LEMMA": "revenue"}],

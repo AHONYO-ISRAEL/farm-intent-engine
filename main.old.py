@@ -21,7 +21,7 @@ def tokenize(doc):
     """Print the part-of-speech tag for each token."""
     print("TOKENS & POS TAGS:")
     for token in doc:
-        print(token.pos_)
+        print( token.text ,"->", token.pos_, " - ", token.tag_)
     print("-" * 40)
 
 
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     nlp = load_nlp_model()
 
     # Example text
-    text = 'Apple were looking at buying startup in San Francisco today and three weeks ago '
+    text = 'Did we sell more eggs this week compared to the previous week ? '
     doc = process_text(nlp, text)
 
     # Run functions
