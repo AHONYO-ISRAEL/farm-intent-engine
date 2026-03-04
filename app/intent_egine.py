@@ -29,9 +29,9 @@ class IntentEngine:
         if not matches:
             return IntentResult(
                 intent_id="unknown",
-                entities={},
                 query_type="unknown",
-                confidence=0.0
+                meta={},
+                filters={}
             )
 
         # Choose highest priority intent
@@ -52,7 +52,7 @@ class IntentEngine:
 
         return IntentResult(
             intent_id=best_intent,
-            entities={"date_range": date_range} if date_range else {},
-            query_type= detect_query_type(doc),
-            confidence=confidence
+            filters={ "date_range":  date_range  if date_range else []},
+            query_type=detect_query_type(doc),
+            meta={"confidence": confidence} if confidence else {}
         )

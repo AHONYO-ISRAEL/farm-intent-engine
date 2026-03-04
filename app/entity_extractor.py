@@ -1,4 +1,4 @@
-from app.extractors.date_extractor_utils import extract_date_range, extract_comparison_date_range
+from app.extractors.date_extractor_utils import extract_date_range, extract_comparison_date_ranges
 from app.extractors.query_type_detector_utils import QUERY_TYPE_RULES
 
 
@@ -11,10 +11,10 @@ def extract_date_entities(doc):
         for ent in doc.ents
         if ent.label_ == "DATE"
     ]
-    if len(date_entities) <= 0 or len(date_entities)> 2:
+    if len(date_entities) <= 0 or len(date_entities) > 2:
         return None
     if len(date_entities) == 2:
-        return extract_comparison_date_range(date_entities)
+        return extract_comparison_date_ranges(date_entities)
     return extract_date_range(date_entities[0])
 
 

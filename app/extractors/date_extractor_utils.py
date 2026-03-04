@@ -85,11 +85,25 @@ def extract_date_range(ent: str):
         return None
 
     start, end = resolved
-    return _format_range(start, end)
+    return [_format_range(start, end)]
 
 
-def extract_comparison_date_range(ents: list):
-    return {
-        "time_period_1": extract_date_range(ents[0]),
-        "time_period_2": extract_date_range(ents[1]),
-    }
+def extract_comparison_date_ranges(ents: list):
+    """
+    Accepts list of date expressions.
+    Returns normalized list of date ranges.
+    Example:
+    [
+        {start: ..., end: ...},
+        {start: ..., end: ...}
+    ]
+    """
+    ranges = []
+
+    for ent in ents:
+        resolved = _resolve_date_range(ent)
+        if resolved:
+            start, end = resolved
+            ranges.append(_format_range(start, end))
+
+    return ranges
