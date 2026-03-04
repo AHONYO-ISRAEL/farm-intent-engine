@@ -52,7 +52,7 @@ class IntentEngine:
 
         return IntentResult(
             intent_id=best_intent,
-            filters={ "date_range":  date_range  if date_range else []},
+            filters={ "date_ranges":  date_range  if date_range else []},
             query_type=detect_query_type(doc),
             meta={"confidence": confidence} if confidence else {}
         )
